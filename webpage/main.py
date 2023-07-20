@@ -19,8 +19,10 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+
+    message = "Welcome to Magomir's Wonder Hub!"
     
-    return render_template('index.html', message = 'Welcome to the website!', button_count = 3)
+    return render_template('index.html', message = message, button_count = 3)
 
 
 if __name__ == '__main__':
