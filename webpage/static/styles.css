@@ -1,0 +1,37 @@
+body {
+    background-image: url(imgs/pattern.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    /* width: calc((100% / var(--button-count)) - 2px);   */
+    /* background-color: #4CAF50; */
+    /* color: white; */
+    /* border: none; */
+    /* cursor: pointer; */
+    /* width: calc(33.33% - 2px); */
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 14px 20px;
+    margin: 8px 1px;
+    width: 20%;
+    flex: 1; 
+}
+
+input[type=submit]:hover {
+    opacity: 0.8;
+}
+
+h2 {
+    color: #4CAF50;
+}
