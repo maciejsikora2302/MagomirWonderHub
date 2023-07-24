@@ -18,7 +18,25 @@
     </div>
     
     <div class="content-container">
-        <h2 >{{ message }}</h2>
+        <h1 >{{ welcome_message }}</h1>
+    </div>
+    <div class="content-container2">
+        <div class="gw2-container">
+            <h2>List of today's dailies</h2>
+            <ul style="list-style-type:none">
+                {% for daily in gw2_dailies %}
+                    <li><img class="icon" src="{{ daily.icon }}" alt="{{ daily.name }}" width="32" height="32"> {{ daily.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="gw2-container">
+            <h2>List of tomorrow's dailies</h2>
+            <ul style="list-style-type:none">
+                {% for daily in gw2_tomorrow %}
+                    <li><img class="icon" src="{{ daily.icon }}" alt="{{ daily.name }}" width="32" height="32"> {{ daily.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
     <script>
