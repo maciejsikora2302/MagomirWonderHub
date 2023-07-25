@@ -1,3 +1,5 @@
 *secrets*
 /secrets/secrets.json
 secrets/secrets.json
+/docker/nginx/ssl
+/docker/nginx/ssl*

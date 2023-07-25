@@ -1,0 +1,24 @@
+services:
+  MagomirWonderHubServer:
+    image: magomirwonderhub
+    container_name: MagomirWonderHubServer
+    expose:
+      - "23463"
+    volumes:
+      - HubData:/app/webpage/data
+    restart: unless-stopped
+  proxy:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - MagomirWonderHubServer
+    restart: unless-stopped
+
+volumes:
+  HubData:
