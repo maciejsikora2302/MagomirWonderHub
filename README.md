@@ -1,6 +1,10 @@
-# MagomirWonderHub
+# Magomir Wonder Hub
 
-My small utility website for my convinience :>
+My utility website for my convinience :>
+
+## Current state of infrastructure and design
+
+![Excalidraw image](infrastructure.png)
 
 ## Things I have used in this project
 
@@ -11,6 +15,6 @@ My small utility website for my convinience :>
 - [x] Flask (Python web framework)
 - [x] JSON format for data storage and exchange
 - [x] Docker (containerization)
-- [ ] nginx (web server for certificated https)
-- [ ] Docker-compose (for easy deployment)
+- [x] nginx (web server for certificated https)
+- [x] Docker-compose (for easy deployment)
 - [ ] SQL database (for todo list)
