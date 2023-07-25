@@ -3,6 +3,9 @@ param(
     [switch]$y
 )
 
+Write-Output "Stopping docker compose"
+docker-compose down
+
 Write-Output "Rebuilding docker images"
 
 Write-Output "Rebuilding docker magomirwonderhub"
