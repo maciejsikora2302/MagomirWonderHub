@@ -5,7 +5,6 @@ app = Flask(__name__)
 
 
 
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
@@ -14,7 +13,7 @@ def home():
     gw2_tomorrow = get_gw2_tomorrow()
     
 
-    pprint(gw2_dailies)
+    # pprint(gw2_dailies)
     return render_template('index.html', 
                            welcome_message = message, 
                            gw2_dailies = gw2_dailies,
@@ -24,4 +23,5 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=23463)
+
+    app.run(debug=True, port=23463, host='0.0.0.0')
