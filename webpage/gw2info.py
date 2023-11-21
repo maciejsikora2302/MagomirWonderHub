@@ -8,9 +8,20 @@ import datetime
 def get_today_timestamp():
     return datetime.datetime.now().strftime('%Y-%m-%d')
 
+def get_timestamp():
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
 def is_timestamp_equal_today(timestamp: datetime):
     today_timestamp = get_today_timestamp()
     return timestamp == today_timestamp
+
+def is_timestamp_older_than_one_minute(timestamp: datetime):
+    today_timestamp = datetime.datetime.strptime(get_timestamp(), '%Y-%m-%d %H:%M:%S')
+    time_difference = today_timestamp - timestamp
+    one_minute = datetime.timedelta(minutes=1)
+
+    return time_difference > one_minute
+    
 
 BASE_LINK = "https://api.guildwars2.com/v2/"
 with open('../secrets/secrets.json', 'r') as f:
@@ -87,7 +98,7 @@ def process_daily(raw_data):
             content = {'name': normal_name, 'icon': special_icon}
             fractal_content.append(content)
         elif name_id in get_list_of_ids(pve):
-            content = {'name': normal_name, 'icon': pve_icon}
+            content = {'name': normal_name, 'icon': pve_icon, 'id': name_id}
             if "Mystic Forger" in normal_name:
                 content = {'name': normal_name.upper(), 'icon': fractal_icon}
             pve_content.append(content)
@@ -121,6 +132,10 @@ def process_daily(raw_data):
         for daily in mid_daily:
             if daily.lower() in content['name'].lower():
                 content['icon'] = 'static/gw2_icons/silver_icon.png'
+
+    for content in names_with_type:
+        content['name'] = content['name'].replace('—', ' — ')
+        content['name'] = content['name'].replace('Daily', '')
 
     return names_with_type
 
@@ -156,13 +171,29 @@ def get_gw2_tomorrow():
     return process_daily(raw_data)
     
 
+def get_gw2_compleated_check(ids):
+    data_path = 'data/achi_check.json'
+
+    if check_if_data_is_older_than_one_minute(data_path):
+        print("Compleated achi is up to date.")
+        raw_data = load_data(data_path)
+    else:
+        print("Compleated achi is not up to date. Getting new data.")
+        response = requests.get(BASE_LINK + f"account/achievements?id={ids[0]}", headers=HEADERS)
+        raw_data = response.json()
+        save_data_with_timestamp(raw_data, data_path, get_time_function = get_timestamp)
+
+    
+    return raw_data
+
+
 def get_info_about_achi(ids: list[str]):
     response = requests.get(BASE_LINK + f"achievements?ids={ids}", headers=HEADERS)
     raw_data = response.json()
     return raw_data
 
-def save_data_with_timestamp(data, file_path):
-    timestamp = get_today_timestamp()
+def save_data_with_timestamp(data, file_path, get_time_function: callable = get_today_timestamp):
+    timestamp = get_time_function()
     to_save = {
         'timestamp': timestamp,
         'data': data
@@ -181,6 +212,16 @@ def check_if_data_is_up_to_date(file_path):
         timestamp = data['timestamp']
     return is_timestamp_equal_today(timestamp)
 
+def check_if_data_is_older_than_one_minute(file_path):
+    #if path doesnt exists, return false
+    if not os.path.exists(file_path):
+        return False
+
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+        timestamp = data['timestamp']
+    return is_timestamp_equal_today(timestamp)
+
 def load_data(file_path):
     with open(file_path, 'r') as f:
         data = json.load(f)
@@ -188,8 +229,10 @@ def load_data(file_path):
     return data
 
 if __name__ == "__main__":
-    get_gw2_daily()
+    for _ in get_gw2_daily():
+        print(_)
     # get_gw2_tomorrow()
+    # get_gw2_compleated_check(['1981', '500', '1954', '1953'])
 
 
 

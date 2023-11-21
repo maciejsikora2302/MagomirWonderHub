@@ -80,12 +80,18 @@ body {
     -2px -1px 0 #000;
 }
 
+.icon {
+    position: relative;
+    top: 12px;
+    left: 5px;
+}
+
 .content-container2 {
-    background-image: url(imgs/gold_waves.png);
+    /* background-image: url(imgs/gold_waves.png);
     background-repeat: repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed; */
     text-align: center;
     opacity: 1;
     margin: 2% 2% 2% 2%;
@@ -93,27 +99,31 @@ body {
     border-radius: 7px;
     color: white;
 
+    display: grid;
+    grid-template-columns: 40% 40%;
+    /* grid-template-rows: 1fr 1fr; */
+    /* grid-gap: 10%; */
+    justify-content: center;
 }
 
-.icon {
-    position: relative;
-    top: 12px;
-    left: 5px;
-}
 /* inherit from content-container */
 .gw2-container {
     background-image: url(imgs/gold_waves.png);
     background-repeat: repeat;
-    background-size: cover;
+    background-size: auto;
     background-position: center;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     align-items: left;
     text-align: left;
-    float: left;
-    padding: 14px 20px;
-    margin: 8px 1px;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 900;
+    /* float: left; */
+    padding: 20px 20px;
+    margin: 8px 8px;
     border: 4px solid #cfa96b;
-    width: calc((100% / var(2)) - 2px);  /* Adjusted width to dynamically calculate button width */
+    /* width: calc((100% / var(2)) - 2px);  Adjusted width to dynamically calculate button width */
+    width: 90%;
     flex: 1;
     border-radius: 10px;
     text-shadow: 1px 1px 0 #000,
