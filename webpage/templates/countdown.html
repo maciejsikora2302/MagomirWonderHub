@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Magomir's Wonders Hub</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('static/northen_lights.png'); /* Set the background image path */
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent the image from repeating */
+        }
+
+        .message-box {
+            border: 2px solid #000;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for better readability */
+        }
+
+        .countdown-container {
+            background-color: rgba(192, 192, 192, 0.5); /* Light gray background with transparency */
+            padding: 20px;
+            border: 2px solid #000;
+        }
+
+        .countdown-box {
+            padding: 10px;
+            text-align: center;
+            background-color: rgb({{ color.r }}, {{ color.g }}, {{ color.b }}); /* Set RGB values to 0 (black) */
+            margin-bottom: 10px;
+        }
+
+        .countdown-phd-box {
+            padding: 10px;
+            text-align: center;
+            background-color: rgb({{ color_phd.r }}, {{ color_phd.g }}, {{ color_phd.b }}); /* Set RGB values to 0 (black) */
+        }
+
+        h1, h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box">
+        <h1>{{ message }}</h1>
+        
+        <div class="countdown-container">
+            <h2>Countdowns</h2> <!-- Title for the countdowns -->
+            <div class="countdown-box">
+                <h2>{{ countdown }}</h2>
+            </div>
+
+            <div class="countdown-phd-box">
+                <h2>{{ countdown_phd }}</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
